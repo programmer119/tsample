@@ -1,0 +1,35 @@
+{
+  "response": {
+    "submitted_at": "2026-07-15T09:30:00+09:00",
+    "response_id": "R-20260715-093000-DEMO01",
+    "examiner_code": "TEST-001",
+    "child_name": "김하늘",
+    "child_name_masked": "김*늘",
+    "birth_year": 2021,
+    "birth_month": 5,
+    "gender": "F",
+    "age_group": "5-6"
+  },
+  "score": {
+    "age_years": 5,
+    "age_group": "5-6",
+    "factors": [
+      {"id":"activity","name":"활동성","raw":26,"t_score":63,"percentile":90,"level":"high"},
+      {"id":"adaptability","name":"적응성","raw":25,"t_score":56,"percentile":74,"level":"high"},
+      {"id":"sensitivity","name":"민감성","raw":18,"t_score":50,"percentile":50,"level":"mid"},
+      {"id":"persistence","name":"지속성","raw":22,"t_score":56,"percentile":74,"level":"high"},
+      {"id":"sociability","name":"사회성","raw":27,"t_score":63,"percentile":90,"level":"high"},
+      {"id":"emotionality","name":"정서성","raw":14,"t_score":44,"percentile":30,"level":"low"}
+    ],
+    "type": {
+      "id": "type_01",
+      "name": "활기찬 돌고래형",
+      "animal": "돌고래",
+      "summary": "새로운 자극과 관계 속에서 에너지가 잘 살아나며, 사람과 함께 움직이고 표현할 때 강점이 돋보이는 유형입니다.",
+      "strengths": ["새로운 활동에 빠르게 참여합니다.", "또래 상호작용에서 표현력이 좋습니다.", "활동적인 환경에서 긍정적인 에너지를 나눕니다."],
+      "careTips": ["활동 전후의 전환 시간을 미리 예고해 주세요.", "충분히 움직인 뒤 차분한 과제로 연결해 주세요.", "차례와 경계를 구체적인 말로 안내해 주세요."],
+      "confidence": 1
+    }
+  },
+  "warnings": []
+}

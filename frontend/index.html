@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="유아동 기질검사 Google Form 실시간 연동 테스트">
+  <title>유아동 기질검사 자동 채점</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <div class="brand-mark">T</div>
+        <div>
+          <strong>Temperament</strong>
+          <span>Report Studio</span>
+        </div>
+      </div>
+
+      <nav aria-label="주요 메뉴">
+        <a href="#dashboard" class="active">대시보드</a>
+        <a href="#workflow">자동 처리 흐름</a>
+        <a href="#results">실시간 처리 결과</a>
+        <a href="#reports">결과지 샘플</a>
+      </nav>
+
+      <div class="side-note">
+        <span>GOOGLE FORM TEST</span>
+        <strong id="buildVersion">연결 전</strong>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">CHILD TEMPERAMENT AUTOMATION</p>
+          <h1>유아동 기질검사 자동 채점</h1>
+          <p class="lead">실제 Google Form 제출을 감지해 응답 검증, 테스트 채점, Puppeteer/Chromium 기반 고품질 PDF 생성까지 자동으로 처리합니다.</p>
+          <div class="hero-actions">
+            <a id="openFormBtn" class="primary-action disabled" href="#" target="_blank" rel="noopener" aria-disabled="true">테스트 구글폼 열기</a>
+            <button id="refreshNowBtn" class="secondary-action" type="button">지금 새로고침</button>
+          </div>
+        </div>
+        <div class="connection-pill waiting" id="connectionState"><i></i><span>Google Sheets 연결 대기</span></div>
+      </header>
+
+      <section id="dashboard">
+        <div class="section-heading">
+          <div>
+            <span>OVERVIEW</span>
+            <h2>실시간 처리 현황</h2>
+          </div>
+          <div class="updated-at" id="updatedAt">아직 데이터를 받지 못했습니다.</div>
+        </div>
+
+        <div class="metric-grid">
+          <article>
+            <span>전체 응답</span>
+            <strong id="metricResponses">-</strong>
+            <small>Google Form 제출 건수</small>
+          </article>
+          <article>
+            <span>채점 완료</span>
+            <strong id="metricScored">-</strong>
+            <small>테스트 규준 환산 완료</small>
+          </article>
+          <article>
+            <span>PDF 생성</span>
+            <strong id="metricReports">-</strong>
+            <small>Puppeteer 자동 결과지</small>
+          </article>
+          <article>
+            <span>처리 실패</span>
+            <strong id="metricFailed">-</strong>
+            <small>검증 또는 생성 오류</small>
+          </article>
+        </div>
+      </section>
+
+      <section id="workflow" class="panel">
+        <div class="panel-title">
+          <div>
+            <span>LIVE AUTOMATION FLOW</span>
+            <h2>Google Form 제출 후 자동 처리</h2>
+          </div>
+        </div>
+
+        <div class="workflow-grid">
+          <article>
+            <div class="step-number">01</div>
+            <h3>실제 Google Form 제출</h3>
+            <p>학부모가 36개 객관식 문항과 아동 정보를 제출합니다.</p>
+          </article>
+          <div class="flow-arrow">→</div>
+          <article>
+            <div class="step-number">02</div>
+            <h3>제출 트리거·응답 파싱</h3>
+            <p>Apps Script의 제출 트리거가 즉시 실행되어 문항과 기본 정보를 파싱합니다.</p>
+          </article>
+          <div class="flow-arrow">→</div>
+          <article>
+            <div class="step-number">03</div>
+            <h3>검증·테스트 채점</h3>
+            <p>누락값, 점수 범위, 역채점, 6요인 및 더미 규준표 환산을 처리합니다.</p>
+          </article>
+          <div class="flow-arrow">→</div>
+          <article>
+            <div class="step-number">04</div>
+            <h3>10페이지 고품질 PDF 생성</h3>
+            <p>Cloud Run의 Puppeteer가 HTML/CSS를 Chromium으로 렌더링하고 Google Drive에 저장합니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="results" class="panel">
+        <div class="panel-title results-title">
+          <div>
+            <span>LIVE PROCESSING RESULTS</span>
+            <h2>최근 처리 결과</h2>
+          </div>
+          <p class="privacy-note">공개 테스트 화면에는 아동 이름을 마스킹해 표시합니다.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>제출 시각</th>
+                <th>응답 ID</th>
+                <th>검사자 코드</th>
+                <th>아동명</th>
+                <th>연령 정보</th>
+                <th>성별</th>
+                <th>대표 유형</th>
+                <th>상태</th>
+                <th>결과지</th>
+              </tr>
+            </thead>
+            <tbody id="resultRows">
+              <tr><td colspan="9" class="empty">Google Form 제출 후 실제 처리 결과가 표시됩니다.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="reports" class="panel report-showcase">
+        <div class="panel-title">
+          <div>
+            <span>DESIGN REFERENCE</span>
+            <h2>기존 결과지 디자인 샘플</h2>
+          </div>
+        </div>
+
+        <div class="report-grid">
+          <article>
+            <div class="report-cover cover-one">
+              <span>01</span>
+              <strong>활기찬<br>돌고래형</strong>
+              <small>10페이지 디자인 샘플</small>
+            </div>
+            <div class="report-info">
+              <h3>김하늘 아동 결과지</h3>
+              <p>요인별 프로파일과 맞춤형 해석이 반영된 기존 샘플입니다.</p>
+              <div class="sample-actions"><a class="primary-link" href="report.html?sample=1" target="_blank" rel="noopener">화면 결과지</a><a class="secondary-link" href="sample_reports/sample_puppeteer_01.pdf" target="_blank" rel="noopener">자동 PDF</a></div>
+            </div>
+          </article>
+
+          <article>
+            <div class="report-cover cover-two">
+              <span>02</span>
+              <strong>신중한<br>고슴도치형</strong>
+              <small>10페이지 디자인 샘플</small>
+            </div>
+            <div class="report-info">
+              <h3>이도윤 아동 결과지</h3>
+              <p>연령·성별 규준표를 적용한 점수 환산 기존 샘플입니다.</p>
+              <div class="sample-actions"><a class="primary-link" href="report.html?sample=2" target="_blank" rel="noopener">화면 결과지</a><a class="secondary-link" href="sample_reports/sample_puppeteer_02.pdf" target="_blank" rel="noopener">자동 PDF</a></div>
+            </div>
+          </article>
+
+          <article>
+            <div class="report-cover cover-three">
+              <span>03</span>
+              <strong>유연한<br>수달형</strong>
+              <small>10페이지 디자인 샘플</small>
+            </div>
+            <div class="report-info">
+              <h3>박서아 아동 결과지</h3>
+              <p>방사형 차트와 막대 차트가 포함된 기존 샘플입니다.</p>
+              <div class="sample-actions"><a class="primary-link" href="report.html?sample=3" target="_blank" rel="noopener">화면 결과지</a><a class="secondary-link" href="sample_reports/sample_puppeteer_03.pdf" target="_blank" rel="noopener">자동 PDF</a></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="system-note">
+        <strong>현재 단계의 범위</strong>
+        <p>Google Form 생성, 제출 즉시 파싱, 테스트 채점, Cloud Run Puppeteer PDF 자동 생성, Google Drive 보관, 공개 Google Sheet 실시간 조회까지 연결합니다. 문항·규준표·유형 조건·해석문은 실제 클라이언트 자료를 받으면 교체해야 합니다.</p>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

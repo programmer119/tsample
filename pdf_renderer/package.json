@@ -1,0 +1,19 @@
+{
+  "name": "temperament-pdf-renderer",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Serverless Puppeteer PDF renderer for child temperament reports",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test:sample": "node scripts/render-sample.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "5.1.0",
+    "puppeteer-core": "25.3.0"
+  }
+}

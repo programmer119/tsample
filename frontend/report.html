@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>유아동 기질검사 결과지</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <div class="viewer-toolbar">
+    <button type="button" onclick="window.close(); history.back();">돌아가기</button>
+    <span id="viewerState">결과지 불러오는 중</span>
+    <div class="toolbar-actions"><a id="drivePdfBtn" class="pdf-link hidden" href="#" target="_blank" rel="noopener">자동 PDF 열기</a><button type="button" class="primary" id="printBtn" disabled>인쇄 / PDF 저장</button></div>
+  </div>
+  <main id="reportRoot" class="report-root">
+    <div class="loading-card">
+      <strong>결과지를 불러오고 있습니다.</strong>
+      <p>Google Sheets의 채점 결과를 확인하는 중입니다.</p>
+    </div>
+  </main>
+  <script src="config.js"></script>
+  <script src="report.js"></script>
+</body>
+</html>
